@@ -1,6 +1,9 @@
 #simple game of pong 
 import turtle
+import os
 
+
+#sets window 
 wn = turtle.Screen()
 wn.title("Pong by @TokyoEdTech")
 wn.bgcolor("black")
@@ -89,11 +92,13 @@ while True:
         ball.sety(290)
         #this reverses the direction of the ball
         ball.dy *= -1
+        os.system('afplay bounce.mp3&')
         
     if ball.ycor() < -290:
         ball.sety(-290)
         #this reverses the direction of the ball
         ball.dy *= -1
+        os.system('afplay bounce.mp3&')
         
     if ball.xcor() > 390:
         ball.goto(0, 0)
@@ -101,6 +106,7 @@ while True:
         score_a += 1
         pen.clear()
         pen.write("Player A: {} Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
+        os.system('afplay bounce.mp3&')
         
     if ball.xcor() < -390:
         ball.goto(0, 0)
@@ -108,13 +114,15 @@ while True:
         score_b += 1
         pen.clear()
         pen.write("Player A: {} Player B: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
+        os.system('afplay bounce.mp3&')
         
     # Paddle and ball collisions
     if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() -50):
         ball.setx(340)
         ball.dx *= -1
-       
+        os.system('afplay bounce.mp3&')
     
     if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 50 and ball.ycor() > paddle_a.ycor() -50):
         ball.setx(-340)
         ball.dx *= -1
+        os.system('afplay bounce.mp3&')
