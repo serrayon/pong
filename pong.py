@@ -31,7 +31,18 @@ ball.shape("square")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
+# evrytime the ball moves it does so by 2 pixels
+ball.dx = 2
+ball.dy = -2
 
+#Pen
+pen = turtle.Turtle()
+pen.speed(0)
+pen.color("red")
+pen.penup()
+pen.hideturtle()
+pen.goto(0, 260)
+pen.write("Player A: 0 Player B: 0", align="center", font=("Courier", 24, "normal"))
 # function
 def paddle_a_up():
     y = paddle_a.ycor()
@@ -64,3 +75,35 @@ wn.onkeypress(paddle_b_down, "Down")
 
 while True:
     wn.update()
+    
+    #move Ball
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+    
+    # border checking
+    if ball.ycor() > 290:
+        ball.sety(290)
+        #this reverses the direction of the ball
+        ball.dy *= -1
+        
+    if ball.ycor() < -290:
+        ball.sety(-290)
+        #this reverses the direction of the ball
+        ball.dy *= -1
+        
+    if ball.xcor() > 390:
+        ball.goto(0, 0)
+        ball.dx *= -1
+        
+    if ball.xcor() < -390:
+        ball.goto(0, 0)
+        ball.dx *= -1
+        
+    # Paddle and ball collisions
+    if (ball.xcor() > 340 and ball.xcor() < 350) and (ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() -50):
+        ball.setx(340)
+        ball.dx *= -1
+    
+    if (ball.xcor() < -340 and ball.xcor() > -350) and (ball.ycor() < paddle_a.ycor() + 50 and ball.ycor() > paddle_a.ycor() -50):
+        ball.setx(-340)
+        ball.dx *= -1
